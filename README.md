@@ -69,7 +69,7 @@ The server package contains:
 * **ServerGui** — main server component with graphical interface
 * **FunkcjeImp** — implementation of the server-side functionality
 * **Funkcje** — remote interface containing methods available to clients
-* **MessageObserver** — interface defining the `sendMessage()` method, implemented by the client classes
+* **MessageObserver** — observer interface implemented by clients to receive messages
 * **LogWriter** — responsible for writing chat logs
 
 ## Communication
@@ -78,7 +78,9 @@ The application uses **Java RMI (Remote Method Invocation)** to enable communica
 
 The server-side functionality is implemented by `FunkcjeImp`. It implements the remote `Funkcje` interface. Clients use this interface to invoke remote methods provided by the server.
 
-Connected clients implement the `MessageObserver` interface. `FunkcjeImp` keeps track of connected clients through `MessageObserver` and uses its `sendMessage` method to deliver messages to the sender and recipient.
+The application also uses the **Observer Pattern** to manage connected clients. `FunkcjeImp` maintains a collection of active clients implementing the `MessageObserver` interface. Clients can register and unregister themselves using `addObserver()` and `removeObserver()`.
+
+The `MessageObserver` interface defines the `sendMessage()` method implemented by the client classes.
 
 ### UML Diagram
 
