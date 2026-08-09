@@ -60,17 +60,16 @@ The client package contains:
 
 * **Klient** — client implementation without a graphical interface
 * **KlientGUIMulti** — GUI client containing the main client functionality
-* **MessageObserver** — handles message-related notifications
 
 ### Server
 
 The server package contains:
 
 * **Server** — main server component
-* **ServerGui** — graphical interface for the server
+* **ServerGui** — main server component with graphical interface
 * **FunkcjeImp** — implementation of the server-side functionality
-* **IFunkcje** — remote interface containing methods available to clients
-* **IMessageObserver** — interface used for message and user-related notifications
+* **Funkcje** — remote interface containing methods available to clients
+* **MessageObserver** — interface defining the `sendMessage()` method, implemented by the client classes
 * **LogWriter** — responsible for writing chat logs
 
 ## Communication
