@@ -62,11 +62,22 @@ public class FunkcjeImp implements Funkcje {
     }
 
     private void broadcastActiveUsers(){
-        String userList = "ACTIVE_USERS: " + String.join(",", activeClients.keySet());
-        for(MessageObserver observer : activeClients.values()){
-            try{
+        List<String> clientIdentifiers;
+        List<MessageObserver> observers;
+
+        synchronized (this) {
+            clientIdentifiers = new ArrayList<>(activeClients.keySet());
+            observers = new ArrayList<>(activeClients.values());
+        }
+
+        String userList = "ACTIVE_USERS: " + String.join(",", clientIdentifiers);
+
+        for (MessageObserver observer : observers) {
+            try {
                 observer.sendmessage(userList);
-            }catch (RemoteException e){}
+            } catch (RemoteException e) {
+                System.out.println("Błąd podczas wysyłania listy aktywnych użytkowników: " + e.getMessage());
+            }
         }
     }
 }

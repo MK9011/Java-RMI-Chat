@@ -36,7 +36,9 @@ public class ServerGUI {
                 @Override
                 public void recieveMessage(String msg, String userId, String godzina) throws RemoteException {
                     super.recieveMessage(msg, userId, godzina);
+                    String logEntry = userId + ": " + msg;
                     logArea.append(userId + ": " + msg + "\n");
+                    LogWriter.logMessage(userId, msg, godzina);
                 }
             };
 
@@ -50,6 +52,6 @@ public class ServerGUI {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(ServerGUI::new);
+        SwingUtilities.invokeLater(() -> new ServerGUI());
     }
 }
