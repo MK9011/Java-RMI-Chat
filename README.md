@@ -75,47 +75,49 @@ The server package contains:
 
 ## Communication
 
-The application uses **Java RMI** to enable communication between clients and the server.
+The application uses **Java RMI (Remote Method Invocation)** to enable communication between clients and the server.
 
-The general architecture can be represented as:
+The server-side functionality is implemented by `FunkcjeImp`. It implements the remote `Funkcje` interface. Clients use this interface to invoke remote methods provided by the server.
 
-![](https://github.com/MK9011/Java-RMI-Chat/blob/main/diagramklas.png "Class diagram")
+Connected clients implement the `MessageObserver` interface. `FunkcjeImp` keeps track of connected clients through `MessageObserver` and uses its `sendMessage` method to deliver messages to the sender and recipient.
 
-Clients communicate with the server using methods defined in the `IFunkcje` remote interface.
-
-The observer mechanism is used to notify clients about incoming messages and relevant changes, such as the list of connected users.
-
-## Logging
-
-The application includes the `LogWriter` component, which is responsible for saving chat activity to log files.
-
-This provides a record of communication taking place within the application.
-
-## UML Diagram
+### UML Diagram
 
 The project includes a UML diagram created using **PlantUML**.
 
 The source file is available in:
 
 ```text
-diagram.puml
+diagramklas.puml
 ```
+
+Also there's a photo of UML diagram:
+![UML Diagram](https://github.com/MK9011/Java-RMI-Chat/blob/main/diagramklas.png "Class diagram")
+
+## Logging
+
+The application includes the `LogWriter` component, which is responsible for saving chat activity to file `chat_history.txt`.
+
+This provides a record of communication taking place within the application.
 
 ## Running the Application
 
-The application consists of a server and one or more clients.
+The project was developed and tested using **IntelliJ IDEA**.
 
-A typical startup sequence is:
+There are two ways to run the application:
 
-1. Start the RMI registry/server.
-2. Start the chat server.
-3. Start one or more client instances.
-4. Connect the clients to the server.
-5. Exchange messages between connected clients.
+### Using `Main.java`
 
-The GUI client can be launched using `Main.java`.
+Run `Main.java` to start the server and the GUI clients. On the start you will be asked to enter the number of clients and their names.
 
-> The exact startup procedure may depend on the Java/IDE configuration used to run the project.
+### Running the components separately
+
+The server and client can also be started independently, allowing multiple client instances to connect to the server.
+
+* Run the server application.
+* Run `Klient.java` and `Server.java` or `KlientGUIMulti.java` and `ServerGUI.java`.
+* Run another client instances to add multiple users to chat.
+* Exchange messages between connected clients.
 
 ## My Contribution
 
