@@ -74,12 +74,12 @@ package ServerPackage {
 
     FunkcjeImp ..|> Funkcje
     FunkcjeImp --> MessageObserver : activeClients
-    FunkcjeImp --> LogWriter : używa
+    FunkcjeImp --> LogWriter : use
 }
 
 KlientGUIMulti --> Funkcje : manager
 Klient --> Funkcje : manager
-Server --> FunkcjeImp : tworzy instancję
-ServerGUI --> FunkcjeImp : tworzy instancję
+Server --> FunkcjeImp : creates an instance
+ServerGUI --> FunkcjeImp : creates an instance
 
 @enduml
