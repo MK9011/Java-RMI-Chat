@@ -100,6 +100,20 @@ The application includes the `LogWriter` component, which is responsible for sav
 
 This provides a record of communication taking place within the application.
 
+## Screenshots
+
+### Server
+
+The server application running with its graphical interface.
+
+![Server GUI](screens/example1.jpg)
+
+### Client
+
+The GUI client with exchanged chat messages.
+
+![Client GUI](screens/example2.jpg)
+
 ## Running the Application
 
 The project was developed and tested using **IntelliJ IDEA**.
