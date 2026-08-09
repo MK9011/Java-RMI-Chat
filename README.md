@@ -79,7 +79,7 @@ The application uses **Java RMI** to enable communication between clients and th
 
 The general architecture can be represented as:
 
-!(https://github.com/MK9011/Java-RMI-Chat/blob/main/diagramklas.png "Class diagram")
+![](https://github.com/MK9011/Java-RMI-Chat/blob/main/diagramklas.png "Class diagram")
 
 Clients communicate with the server using methods defined in the `IFunkcje` remote interface.
 
