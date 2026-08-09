@@ -9,6 +9,7 @@ package KlientPackage {
         - static int aktywniKlienci
         - DefaultListModel<String> userListModel
         - JList<String> userList
+        - TitledBorder userListBorder
         + KlientGUIMulti(String username)
         - createUI()
         - setDarkMode(JFrame frame)
@@ -64,13 +65,19 @@ package ServerPackage {
         + main(String[] args)
     }
 
+    class LogWriter {
+        - String LOG_FILE
+        + logMessage(String userId, String msg, String time)
+    }
+
     FunkcjeImp ..|> Funkcje
-    FunkcjeImp o-- MessageObserver : uses
+    FunkcjeImp --> MessageObserver : activeClients
+    FunkcjeImp --> LogWriter : używa
 }
 
 KlientGUIMulti --> Funkcje : manager
 Klient --> Funkcje : manager
-Server --> FunkcjeImp : creates
-ServerGUI --> FunkcjeImp : creates
+Server --> FunkcjeImp : tworzy instancję
+ServerGUI --> FunkcjeImp : tworzy instancję
 
 @enduml
