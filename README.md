@@ -13,7 +13,7 @@ The application follows a client-server architecture and allows multiple clients
 * Sending and receiving chat messages
 * Displaying the list of actually connected users
 * Message observer mechanism
-* Chat activity logging
+* Saving chat logs to a file
 * Client, server version without GUI
 
 ## Technologies
@@ -32,20 +32,20 @@ Java-RMI-Chat/
 ├── ClientPackage/
 │   ├── Klient.java
 │   ├── KlientGUIMulti.java
-│   └── MessageObserver.java
 │
 ├── ServerPackage/
-│   ├── Server.java
-│   ├── ServerGui.java
+|   ├── Funkcje.java
 │   ├── FunkcjeImp.java
-│   ├── IFunkcje.java
-│   ├── IMessageObserver.java
-│   └── LogWriter.java
+│   ├── LogWriter.java
+│   ├── MessageObserver.java
+│   ├── Server.java
+│   ├── ServerGUI.java
 │
-├── Main.java
-├── diagram.puml
+├── .gitignore
+├── Main.java 
 ├── README.md
-└── .gitignore
+├── diagramklas.png
+└── diagramklas.puml
 ```
 
 ## Architecture
@@ -79,30 +79,7 @@ The application uses **Java RMI** to enable communication between clients and th
 
 The general architecture can be represented as:
 
-```text
-                    ┌─────────────────┐
-                    │   Server GUI    │
-                    └────────┬────────┘
-                             │
-                             ▼
-                    ┌─────────────────┐
-                    │     Server      │
-                    │                 │
-                    │   FunkcjeImp    │
-                    └────────┬────────┘
-                             │
-                         Java RMI
-                             │
-              ┌──────────────┼──────────────┐
-              │              │              │
-              ▼              ▼              ▼
-          ┌────────┐     ┌────────┐     ┌────────┐
-          │Client 1│     │Client 2│     │Client 3│
-          └────────┘     └────────┘     └────────┘
-              │              │              │
-              ▼              ▼              ▼
-            User           User           User
-```
+!(https://github.com/MK9011/Java-RMI-Chat/blob/main/diagramklas.png "Class diagram")
 
 Clients communicate with the server using methods defined in the `IFunkcje` remote interface.
 
