@@ -4,6 +4,7 @@ import ServerPackage.Funkcje;
 import ServerPackage.MessageObserver;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.rmi.Naming;
@@ -20,6 +21,7 @@ public class KlientGUIMulti extends UnicastRemoteObject implements MessageObserv
     private static int aktywniKlienci = 0;
     private DefaultListModel<String> userListModel = new DefaultListModel<>();
     private JList<String> userList;
+    private TitledBorder userListBorder;
 
     public KlientGUIMulti(String username) throws RemoteException {
         super();
@@ -51,8 +53,11 @@ public class KlientGUIMulti extends UnicastRemoteObject implements MessageObserv
 
         userListModel = new DefaultListModel<>();
         userList = new JList<>(userListModel);
-        userList.setBorder(BorderFactory.createTitledBorder("Aktywni użytkownicy"));
-        userList.setPreferredSize(new Dimension(150, 0));
+        userListBorder = BorderFactory.createTitledBorder("Aktywni użytkownicy");
+        userListBorder.setTitleFont(new Font("Segoe UI", Font.PLAIN, 12));
+        userList.setBorder(userListBorder);
+        userList.setPreferredSize(new Dimension(250, 0));
+
         frame.add(new JScrollPane(userList), BorderLayout.EAST);
 
         inputField = new JTextField();
@@ -144,6 +149,10 @@ public class KlientGUIMulti extends UnicastRemoteObject implements MessageObserv
 
         userList.setSelectionBackground(Color.DARK_GRAY);
         userList.setSelectionForeground(Color.WHITE);
+
+        if (userListBorder != null) {
+            userListBorder.setTitleColor(Color.WHITE);
+        }
     }
 
     private void setLightMode(JFrame frame) {
@@ -163,6 +172,10 @@ public class KlientGUIMulti extends UnicastRemoteObject implements MessageObserv
 
         userList.setSelectionBackground(Color.LIGHT_GRAY);
         userList.setSelectionForeground(Color.BLACK);
+
+        if (userListBorder != null) {
+            userListBorder.setTitleColor(Color.BLACK);
+        }
     }
 
     private void connectToServer() {
@@ -200,9 +213,14 @@ public class KlientGUIMulti extends UnicastRemoteObject implements MessageObserv
             try {
                 if (input != null && !input.trim().isEmpty()) {
                     liczbaKlientow = Integer.parseInt(input.trim());
+                    if (liczbaKlientow < 1) {
+                        throw new NumberFormatException();
+                    }
                 }
+
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Niepoprawna liczba. Uruchamiam 1 klienta.", "Uwaga", JOptionPane.WARNING_MESSAGE);
+                liczbaKlientow = 1;
             }
 
             for (int i = 0; i < liczbaKlientow; i++) {
