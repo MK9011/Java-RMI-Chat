@@ -1,8 +1,4 @@
 # Java-RMI-Chat
-Simple Java RMI chat application
-
-# Java RMI Chat
-
 A multi-client chat application developed in Java using **Java RMI (Remote Method Invocation)**.
 
 The application follows a client-server architecture and allows multiple clients to connect to a central server and exchange messages. Both the client and server include graphical user interfaces.
@@ -13,14 +9,12 @@ The application follows a client-server architecture and allows multiple clients
 
 * Client-server communication using Java RMI
 * Support for multiple connected clients
-* Graphical user interface for the client
-* Graphical user interface for the server
+* Graphical user interface for the client and server
 * Sending and receiving chat messages
-* Displaying the list of connected users
+* Displaying the list of actually connected users
 * Message observer mechanism
 * Chat activity logging
-* Client version without GUI
-* UML architecture diagram
+* Client, server version without GUI
 
 ## Technologies
 
@@ -29,7 +23,6 @@ The application follows a client-server architecture and allows multiple clients
 * **Client-Server Architecture**
 * **GUI**
 * **Observer Pattern**
-* **PlantUML**
 
 ## Project Structure
 
