@@ -1,0 +1,76 @@
+@startuml
+' Pakiety
+package KlientPackage {
+    class KlientGUIMulti {
+        - Funkcje manager
+        - JTextArea chatArea
+        - JTextField inputField
+        - String username
+        - static int aktywniKlienci
+        - DefaultListModel<String> userListModel
+        - JList<String> userList
+        + KlientGUIMulti(String username)
+        - createUI()
+        - setDarkMode(JFrame frame)
+        - setLightMode(JFrame frame)
+        - connectToServer()
+        + sendmessage(String message)
+        + main(String[] args)
+    }
+
+    class Klient {
+        - String clientId
+        + Klient(String clientId)
+        + sendmessage(String message)
+        + start()
+        + main(String[] args)
+    }
+
+    KlientGUIMulti ..|> MessageObserver
+    Klient ..|> MessageObserver
+}
+
+package ServerPackage {
+    interface Funkcje {
+        + recieveMessage(String message, String id, String time)
+        + addObserver(MessageObserver observer, String id)
+        + removeObserver(String id)
+        + getActiveUsers()
+    }
+
+    class FunkcjeImp {
+        - Map<String, MessageObserver> activeClients
+        - List<String> messageHistory
+        + recieveMessage(String message, String id, String time)
+        + addObserver(MessageObserver observer, String id)
+        + removeObserver(String id)
+        + getActiveUsers()
+        - notifyObservers(String msg)
+        - broadcastActiveUsers()
+    }
+
+    interface MessageObserver {
+        + sendmessage(String message)
+    }
+
+    class Server {
+        + main(String[] args)
+    }
+
+    class ServerGUI {
+        - JTextArea logArea
+        + ServerGUI()
+        - startServer()
+        + main(String[] args)
+    }
+
+    FunkcjeImp ..|> Funkcje
+    FunkcjeImp o-- MessageObserver : uses
+}
+
+KlientGUIMulti --> Funkcje : manager
+Klient --> Funkcje : manager
+Server --> FunkcjeImp : creates
+ServerGUI --> FunkcjeImp : creates
+
+@enduml
