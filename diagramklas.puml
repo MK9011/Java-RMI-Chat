@@ -27,6 +27,8 @@ package KlientPackage {
         + main(String[] args)
     }
 
+    interface MessageObserver
+
     KlientGUIMulti ..|> MessageObserver
     Klient ..|> MessageObserver
 }
